@@ -54,7 +54,7 @@ namespace TollFee.Api.Models
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
-            OnModelCreatingPartial(modelBuilder);
+			OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

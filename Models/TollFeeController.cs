@@ -10,7 +10,7 @@ namespace TollFee.Api.Models
 {
     public class CalculateFeeResponse
     {
-        public int TotalFee { get; set; }
-        public float AverageFeePerDay { get; set; }
+        public decimal TotalFee { get; set; }
+        public decimal AverageFeePerDay { get; set; }
     }
 }
