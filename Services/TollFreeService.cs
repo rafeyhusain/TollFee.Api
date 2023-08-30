@@ -8,7 +8,7 @@ namespace TollFee.Api.Services
 {
     public static class TollFreeService
     {
-        internal static IEnumerable<DateTime> RemoveFree(DateTime[] passages)
+		public static IEnumerable<DateTime> RemoveFree(DateTime[] passages)
         {
             foreach (var p in passages)
             {
@@ -17,7 +17,7 @@ namespace TollFee.Api.Services
             }
         }
 
-        internal static bool IsInOtherFreeDays(DateTime date)
+		public static bool IsInOtherFreeDays(DateTime date)
         {
             using (var context = new TollDBContext())
             {

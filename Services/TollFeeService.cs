@@ -8,7 +8,15 @@ namespace TollFee.Api.Services
 {
     public static class TollFeeService
     {
-        internal static decimal GetFee(IEnumerable<DateTime> passages)
+		public static decimal CalculateFee(DateTime[] passages)
+        {
+			var notFree = TollFreeService.RemoveFree(passages);
+			var totalFee = GetFee(notFree);
+
+            return totalFee;
+		}
+
+		public static decimal GetFee(IEnumerable<DateTime> passages)
         {
 			decimal totalFee = 0;
 
@@ -16,7 +24,7 @@ namespace TollFee.Api.Services
             {
                 foreach (var p in passages)
                 {
-                    var fee = context.Fees.First(f => p.TimeOfDay.TotalMinutes >= f.FromMinute && p.TimeOfDay.TotalMinutes <= f.ToMinute);
+                    var fee = context.Fees.FirstOrDefault(f => f.Year == p.Year && p.TimeOfDay.TotalMinutes >= f.FromMinute && p.TimeOfDay.TotalMinutes <= f.ToMinute);
 
                     if (fee == null)
                     {
@@ -33,7 +41,7 @@ namespace TollFee.Api.Services
 			return actualFee;
 		}
 
-        private static decimal GetActualFee(decimal totalFee)
+		public static decimal GetActualFee(decimal totalFee)
         {
             if (totalFee > 60)
             {

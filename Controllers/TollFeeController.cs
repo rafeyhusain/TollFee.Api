@@ -30,8 +30,7 @@ namespace TollFee.Api.Controllers
                 new DateTime(2021, 1, 2)
             }.ToArray();
 
-            var notFree = TollFreeService.RemoveFree(request);
-            var totalFee = TollFeeService.GetFee(notFree);
+            var totalFee = TollFeeService.CalculateFee(request);
 
             var response = new CalculateFeeResponse
             {
